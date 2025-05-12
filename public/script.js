@@ -1,4 +1,5 @@
 const connectBtn = document.getElementById('connectBtn');
+const menu = document.getElementById('menu');
 
 connectBtn.onclick = async () => {
   if (window.ethereum) {

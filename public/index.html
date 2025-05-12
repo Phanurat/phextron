@@ -5,19 +5,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web3 DApp</title>
+    <link rel="icon" type="image/x-icon" href="./assets/logo.png">
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <header>
-        <div class="setlogo">
-            <img src="assets/logo.png" alt="PHEXTRON" class="logo" />
-            <a href="#home">Dashboard</a>
-            
-        </div>
-        <button id="connectBtn">Connect Wallet</button>
+        <nav class="navbar">
+            <div class="nav-left">
+                <div class="nav-logo">
+                    <a href="./index.html">
+                        <img src="assets/logo.png" alt="PHEXTRON" class="logo" />
+                        Dashboard
+                    </a>
+                </div>
+                <ul class="nav-link">
+                    <li><a href="#">Trade</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Swap</a></li>
+                            <li>
+                                <a href="#" class="text-jus">Perps   <i class="fa-solid fa-up-right-from-square"></i>
+                                </a>
+                              </li>
+                            <li><a href="#">Buy Crypto</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Earm</a></li>
+                    <li><a href="#">Bridge</a></li>
+                    <li><a href="#">Play</a></li>
+                    <li><a id="menu" href="#"><i class="fa-solid fa-list"></i></a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="exchange">
+                    <a style="font-size: 30px;" href="#"><i class="fa-duotone fa-solid fa-circle-user"></i></a>
+                    <p>$0.00</p>
+                </div>
+                <a style="font-size: 30px;" href="#"><i class="fa-solid fa-earth-americas"></i></a>
+                <a style="font-size: 30px;" href="#"><i class="fa-solid fa-gear"></i></a>
+                <button class="Chain">BNB Chain </button>
+                <button class="Chain" id="connectBtn">Connect Wallet</button>
+            </div>
+        </nav> 
     </header>
-
     <main>
         <section class="hero">
             <h1>Swap, Stake & Earn</h1>
