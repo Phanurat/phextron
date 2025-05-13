@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web3 DApp</title>
+    <title>Home | Phextron X </title>
     <link rel="icon" type="image/x-icon" href="./assets/logo.png">
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,7 +16,7 @@
             <div class="nav-left">
                 <div class="nav-logo">
                     <a href="./index.html">
-                        <img src="assets/logo.png" alt="PHEXTRON" class="logo" />
+                        <img src="./assets/logo.png" alt="PHEXTRON" class="logo" />
                         Dashboard
                     </a>
                 </div>
@@ -25,9 +25,9 @@
                         <ul class="dropdown">
                             <li><a href="#">Swap</a></li>
                             <li>
-                                <a href="#" class="text-jus">Perps   <i class="fa-solid fa-up-right-from-square"></i>
+                                <a href="#" class="text-jus">Perps <i class="fa-solid fa-up-right-from-square"></i>
                                 </a>
-                              </li>
+                            </li>
                             <li><a href="#">Buy Crypto</a></li>
                         </ul>
                     </li>
@@ -44,10 +44,10 @@
                 </div>
                 <a style="font-size: 30px;" href="#"><i class="fa-solid fa-earth-americas"></i></a>
                 <a style="font-size: 30px;" href="#"><i class="fa-solid fa-gear"></i></a>
-                <button class="Chain">BNB Chain </button>
+                <!--<button class="Chain">BNB Chain </button>-->
                 <button class="Chain" id="connectBtn">Connect Wallet</button>
             </div>
-        </nav> 
+        </nav>
     </header>
     <main>
         <section class="hero">
@@ -56,7 +56,106 @@
         </section>
 
         <section class="cards">
-            <div class="card">🔄 Swap</div>
+            <section class="cards">
+                <section class="swap-container">
+                    <div class="swap-box">
+                        <h2>Swap</h2>
+                        <div class="swap-input-group">
+                            <div class="token-row">
+                                <img id="fromIcon" src="./assets/tokens/btc.png" class="token-icon" />
+                                <input type="number" id="fromAmount" placeholder="0.0" />
+                                <select id="fromToken">
+                                    <option value="BTC" data-icon="./assets/tokens/btc.png">BTC</option>
+                                    <option value="ETH" data-icon="./assets/tokens/eth.png">ETH</option>
+                                    <option value="USDT" data-icon="./assets/tokens/usdt.png">USDT</option>
+                                    <option value="DAI" data-icon="./assets/tokens/dai.png">DAI</option>
+                                </select>
+                            </div>
+                            <p class="balance">Balance: 0.00</p>
+                        </div>
+
+                        <div class="swap-arrow">⬇️</div>
+
+                        <div class="swap-input-group">
+                            <div class="token-row">
+                                <img id="toIcon" src="./assets/tokens/btc.png" class="token-icon" />
+                                <input type="number" id="toAmount" placeholder="0.0" disabled />
+                                <select id="toToken">
+                                    <option value="BTC" data-icon="./assets/tokens/btc.png">BTC</option>
+                                    <option value="ETH" data-icon="./assets/tokens/eth.png">ETH</option>
+                                    <option value="USDT" data-icon="./assets/tokens/usdt.png">USDT</option>
+                                    <option value="DAI" data-icon="./assets/tokens/dai.png">DAI</option>
+                                </select>
+                            </div>
+                            <p class="balance">Balance: 0.00</p>
+                        </div>
+                        <div class="swap-details">
+                            <p id="rate">Rate: - </p>
+                            <p id="priceImpact">Price Impact: ~0%</p>
+                        </div>
+
+                        <button id="swapBtn">Swap</button>
+                        <script>
+                            const fromToken = document.getElementById("fromToken");
+                            const toToken = document.getElementById("toToken");
+                            const fromAmountInput = document.getElementById("fromAmount");
+                            const rateDisplay = document.getElementById("rate");
+                            const priceImpact = document.getElementById("priceImpact");
+
+                            const tokenIdMap = {
+                                "BTC": "bitcoin",
+                                "ETH": "ethereum",
+                                "USDT": "tether",
+                                "DAI": "dai"
+                            };
+
+                            function updateRate() {
+                                const from = fromToken.value;
+                                const to = toToken.value;
+                                const amount = parseFloat(fromAmountInput.value) || 0;
+
+                                if (from === to) {
+                                    rateDisplay.textContent = `Rate: 1 ${from} = 1 ${to}`;
+                                    priceImpact.textContent = `Fee: 0 ${to}`;
+                                    return;
+                                }
+
+                                const fromId = tokenIdMap[from];
+                                const toId = tokenIdMap[to];
+
+                                fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${fromId},${toId}&vs_currencies=usd`)
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        const fromPrice = data[fromId].usd;
+                                        const toPrice = data[toId].usd;
+
+                                        const rate = fromPrice / toPrice;
+                                        const convertedAmount = amount * rate;
+                                        const fee = convertedAmount * 0.002;
+
+                                        rateDisplay.textContent = `Rate: 1 ${from} = ${rate.toFixed(4)} ${to}`;
+                                        priceImpact.textContent = `Fee: 0.2% = ${fee.toFixed(4)} ${to}`;
+                                    })
+                                    .catch(error => {
+                                        console.error("Error fetching price data:", error);
+                                        rateDisplay.textContent = "Rate: unavailable";
+                                        priceImpact.textContent = "Fee: unavailable";
+                                    });
+                            }
+
+                            fromToken.addEventListener("change", updateRate);
+                            toToken.addEventListener("change", updateRate);
+                            fromAmountInput.addEventListener("input", updateRate);
+
+                            // Initial call
+                            updateRate();
+                        </script>
+
+                    </div>
+                </section>
+
+            </section>
+
             <div class="card">💰 Liquidity</div>
             <div class="card">📊 Analytics</div>
         </section>
