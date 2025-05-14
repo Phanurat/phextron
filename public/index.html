@@ -65,6 +65,7 @@
                                 <img id="fromIcon" src="./assets/tokens/btc.png" class="token-icon" />
                                 <input type="number" id="fromAmount" placeholder="0.0" />
                                 <select id="fromToken">
+                                    <option value="PHEXTRON" data-icon="./assets/tokens/coin.png">PHEXTRON</option>
                                     <option value="BTC" data-icon="./assets/tokens/btc.png">BTC</option>
                                     <option value="ETH" data-icon="./assets/tokens/eth.png">ETH</option>
                                     <option value="USDT" data-icon="./assets/tokens/usdt.png">USDT</option>
@@ -81,6 +82,7 @@
                                 <img id="toIcon" src="./assets/tokens/btc.png" class="token-icon" />
                                 <input type="number" id="toAmount" placeholder="0.0" disabled />
                                 <select id="toToken">
+                                    <option value="PHEXTRON" data-icon="./assets/tokens/coin.png">PHEXTRON</option>
                                     <option value="BTC" data-icon="./assets/tokens/btc.png">BTC</option>
                                     <option value="ETH" data-icon="./assets/tokens/eth.png">ETH</option>
                                     <option value="USDT" data-icon="./assets/tokens/usdt.png">USDT</option>
@@ -103,6 +105,7 @@
                             const priceImpact = document.getElementById("priceImpact");
 
                             const tokenIdMap = {
+                                "PHEXTRON": "ADA",
                                 "BTC": "bitcoin",
                                 "ETH": "ethereum",
                                 "USDT": "tether",
